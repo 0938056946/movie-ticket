@@ -87,15 +87,21 @@ Route::prefix('admin')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-    Route::get('/chon-ghe/{booking_id}', [BookingController::class, 'selectSeats'])->name('select_seats');
-    Route::get('/chon-ghe', [BookingController::class, 'selectSeats'])->name('select_seats');
+    // Route cho chọn ghế chưa có booking_id
+    Route::get('/chon-ghe', [BookingController::class, 'selectSeats'])->name('select_seats.form');
+
+    // Route sau khi đã có booking_id (ví dụ sau khi tạo đơn đặt)
+    Route::get('/chon-ghe/{booking_id}', [BookingController::class, 'selectSeatsWithBooking'])->name('select_seats.with_booking');
+
     Route::get('/seats', [SeatController::class, 'index']);
     Route::get('/seats/{showtime_id}', [SeatController::class, 'showSeats'])->name('seats.select');
     //Confirm
     Route::post('/confirm-seats', [BookingController::class, 'confirmSeats'])->name('confirm.seats');
-    Route::post('/payment/momo', [PaymentController::class, 'paymentWithMomo'])->name('payment.momo')->middleware('auth');
-    Route::post('/payment/momo/ipn', [PaymentController::class, 'handleMomoIPN']);
-    Route::get('/payment/momo/success', [PaymentController::class, 'paymentSuccess']);
+
+    Route::post('/payos', [PaymentController::class, 'paymentWithPayOS'])->name('payment.payos');
+    Route::post('/webhook/payos', [PaymentController::class, 'handlePayOSWebhook']);
+    Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 });
 //Movie
 Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');

@@ -9,13 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- CSS Custom -->
+    {{-- <!-- CSS Custom -->
     @vite(['resources/css/style.css'])
     @vite(['resources/css/footer.css'])
     @vite(['resources/css/header.css'])
 
-   
-  
+   --}}
+   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('css/header.css') }}">
+
 </head>
 <body>
     @include('layouts.header') <!-- Header cùng màu -->
@@ -45,7 +48,8 @@
     <div class="container mt-3">
     <div class="quick-booking">
         <h4 class="title">🎟️ ĐẶT VÉ</h4>
-        <form action="{{ route('select_seats') }}" method="GET">
+        <form action="{{ route('select_seats.form') }}" method="GET">
+
     <div class="booking-options">
         <!-- Chọn rạp -->
         <select class="form-select" name="theater_id" id="theater" required>
@@ -226,7 +230,9 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-@vite(['resources/js/home.js'])
+{{-- @vite(['resources/js/home.js']) --}}
+<script src="{{ asset('js/home.js') }}"></script>
+
 <script>
     window.moviesData = @json($movies);
 </script>

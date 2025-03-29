@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- CSS Custom -->
-    @vite(['resources/css/style.css'])
+    {{-- @vite(['resources/css/style.css'])
     @vite(['resources/css/footer.css'])
     @vite(['resources/css/header.css'])
-    @vite(['resources/css/seats.css'])
+    @vite(['resources/css/seats.css']) --}}
+    <link rel="stylesheet" href="{{ asset('css/seats.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 </head>
 <body>
 @include('layouts.header')
